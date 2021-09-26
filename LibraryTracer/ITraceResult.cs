@@ -1,7 +1,0 @@
-﻿namespace LibraryTracer
-{
-    interface ITraceResult
-    {
-
-    }
-}

@@ -1,4 +1,7 @@
 ﻿using LibraryTracer;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace SPP_1LAB
 {
@@ -9,8 +12,23 @@ namespace SPP_1LAB
             ITracer tracer = new Tracer();
             Foo foo = new Foo(tracer);
 
-            foo.Method1();
+            Thread thread1 = new Thread(foo.Method1);
+            thread1.Start();
+
+            Thread thread2 = new Thread(foo.Method2);
+            thread2.Start();
+
+            foo.Method1(); 
             foo.Method2();
+
+            thread1.Join();
+            thread2.Join();
+
+            TraceResult result = tracer.GetTraceResult();
+
+            /*
+            * TODO: add serealisation
+            */
         }
     }
 
@@ -38,6 +56,7 @@ namespace SPP_1LAB
             _tracer.StartTrace();
             _bar.InnerMethod1();
             _bar.InnerMethod2();
+            _bar.InnerMethod3();
             _tracer.StopTrace();
         }
 
