@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using LibraryTracer.serialization;
 
 namespace SPP_1LAB
 {
@@ -11,6 +12,8 @@ namespace SPP_1LAB
         {
             ITracer tracer = new Tracer();
             Foo foo = new Foo(tracer);
+            ISerializer jsonSerializer = new JsonResult();
+            ISerializer xmlSerializer = new XmlResult();
 
             Thread thread1 = new Thread(foo.Method1);
             thread1.Start();
@@ -26,9 +29,14 @@ namespace SPP_1LAB
 
             TraceResult result = tracer.GetTraceResult();
 
-            /*
-            * TODO: add serealisation
-            */
+            string json = jsonSerializer.Serialize(result);
+            string xml = xmlSerializer.Serialize(result);
+
+            Console.WriteLine(json);
+            Console.WriteLine(xml);
+
+            File.WriteAllText("result.json", json);
+            File.WriteAllText("result.xml", xml);
         }
     }
 
@@ -47,7 +55,9 @@ namespace SPP_1LAB
         {
             _tracer.StartTrace();
             Method2();
+            Thread.Sleep(50);
             _bar.InnerMethod1();
+            Thread.Sleep(60);
             _tracer.StopTrace();
         }
 
@@ -55,8 +65,11 @@ namespace SPP_1LAB
         {
             _tracer.StartTrace();
             _bar.InnerMethod1();
+            Thread.Sleep(40);
             _bar.InnerMethod2();
+            Thread.Sleep(90);
             _bar.InnerMethod3();
+            Thread.Sleep(30);
             _tracer.StopTrace();
         }
 
@@ -74,6 +87,7 @@ namespace SPP_1LAB
         public void InnerMethod1()
         {
             _tracer.StartTrace();
+            Thread.Sleep(90);
             _tracer.StopTrace();
         }
 
@@ -81,6 +95,7 @@ namespace SPP_1LAB
         {
             _tracer.StartTrace();
             InnerMethod3();
+            Thread.Sleep(70);
             _tracer.StopTrace();
         }
 
@@ -88,6 +103,7 @@ namespace SPP_1LAB
         {
             _tracer.StartTrace();
             InnerMethod1();
+            Thread.Sleep(100);
             _tracer.StopTrace();
         }
 
