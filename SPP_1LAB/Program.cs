@@ -35,8 +35,9 @@ namespace SPP_1LAB
             Console.WriteLine(json);
             Console.WriteLine(xml);
 
-            File.WriteAllText("result.json", json);
-            File.WriteAllText("result.xml", xml);
+            Directory.CreateDirectory("out");
+            File.WriteAllText("out/result.json", json);
+            File.WriteAllText("out/result.xml", xml);
         }
     }
 
