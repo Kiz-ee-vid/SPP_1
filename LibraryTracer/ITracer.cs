@@ -7,6 +7,6 @@
 
         void StopTrace();
 
-        TraceResult GetTraceResult();
+        ITraceResult GetTraceResult();
     }
 }

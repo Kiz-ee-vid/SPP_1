@@ -35,7 +35,7 @@ namespace LibraryTracer
             _stopwatch.Stop();
         }
 
-        public TraceResult GetTraceResult()
+        public ITraceResult GetTraceResult()
         {
             var results = MethodTracers
                 .Select(threadTracer => (MethodTraceResult)threadTracer.GetTraceResult())

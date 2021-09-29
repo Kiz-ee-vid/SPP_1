@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace LibraryTracer
 {
-    public class TraceResult
+    public class TraceResult:ITraceResult
     {
         [XmlElement("thread")]
         public List<ThreadTraceResult> Threads { get; init; }

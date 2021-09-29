@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace LibraryTracer
 {
-    public class ThreadTraceResult : TraceResult
+    public class ThreadTraceResult : ITraceResult
     {
         [XmlAttribute("id")]
         public long Id { get; init; }

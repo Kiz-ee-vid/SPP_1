@@ -30,7 +30,7 @@ namespace LibraryTracer
             GetThreadTracer(id)?.StopTrace();
         }
 
-        public TraceResult GetTraceResult()
+        public ITraceResult GetTraceResult()
         {
 
             locker.EnterReadLock();

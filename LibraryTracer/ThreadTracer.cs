@@ -49,7 +49,7 @@ namespace LibraryTracer
             }
         }
 
-        public TraceResult GetTraceResult()
+        public ITraceResult GetTraceResult()
         {
             long executionTime = 0;
 

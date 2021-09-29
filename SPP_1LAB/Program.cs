@@ -27,7 +27,7 @@ namespace SPP_1LAB
             thread1.Join();
             thread2.Join();
 
-            TraceResult result = tracer.GetTraceResult();
+            ITraceResult result = tracer.GetTraceResult();
 
             string json = jsonSerializer.Serialize(result);
             string xml = xmlSerializer.Serialize(result);

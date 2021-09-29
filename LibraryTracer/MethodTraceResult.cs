@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace LibraryTracer
 {
-    public class MethodTraceResult : TraceResult
+    public class MethodTraceResult : ITraceResult
     {
         [XmlAttribute("name")]
         public string Name { get; init; }
