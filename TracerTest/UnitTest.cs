@@ -22,7 +22,7 @@ namespace TracerTest
             tracer.StartTrace();
             Thread.Sleep(SleepTime);
             tracer.StopTrace();
-            return tracer.GetTraceResult();
+            return (TraceResult)tracer.GetTraceResult();
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace TracerTest
         {
             const string expected = "MethodTrace";
             MethodTrace();
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = (TraceResult)tracer.GetTraceResult();
             Assert.AreEqual(1, result.Threads[0].Methods.Count);
             Assert.AreEqual(expected, result.Threads[0].Methods[0].Name);
         }
@@ -40,7 +40,7 @@ namespace TracerTest
         {
             long expected = Thread.CurrentThread.ManagedThreadId;
             MethodTrace();
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = (TraceResult)tracer.GetTraceResult();
             Assert.AreEqual(1, result.Threads.Count);
             Assert.AreEqual(expected, result.Threads[0].Id);
         }
@@ -50,7 +50,7 @@ namespace TracerTest
         {
             string expected = typeof(UnitTesting).FullName;
             MethodTrace();
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = (TraceResult)tracer.GetTraceResult();
             Assert.AreEqual(expected, result.Threads[0].Methods[0].ClassName);
         }
 
@@ -66,7 +66,7 @@ namespace TracerTest
                 threads[i].Join();
             }
 
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = (TraceResult)tracer.GetTraceResult();
             Assert.AreEqual(threads.Count, result.Threads.Count);
         }
 
@@ -90,7 +90,7 @@ namespace TracerTest
                 threads[i].Join();
             }
 
-            TraceResult result = tracer.GetTraceResult();
+            TraceResult result = (TraceResult)tracer.GetTraceResult();
 
             Assert.AreEqual(threads.Count, result.Threads.Count);
             Assert.IsTrue(result.Threads[1].Time + 10 >= result.Threads[0].Time && result.Threads[1].Time - 10 <= result.Threads[0].Time);
